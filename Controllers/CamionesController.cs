@@ -297,6 +297,46 @@ namespace Transportes_MVC.Controllers
             }
         }
 
+
+
+        //Get Eliminar
+
+        public ActionResult Eliminar_Camion(int id)
+        {
+            try
+            {
+                using (TransportesEntities context = new TransportesEntities())
+                {
+                    var camion = context.Camiones.FirstOrDefault(x => x.ID_Camion == id);
+                    if (camion == null)
+                    {
+                        //sweet
+                        SweetAlert("No encontrado", $"No hemos encontrado el camión con el identificador {id}", NotificationType.info);
+                        return RedirectToAction("Index");
+
+                    }
+
+                    context.Camiones.Remove(camion);
+                    context.SaveChanges();
+                    SweetAlert("Eliminado", "Camión eliminado con éxito", NotificationType.success);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                //sweetalert
+                SweetAlert("CHALEEE...", $"Ha ocurrido un Error: {ex.Message}", NotificationType.error);
+                return RedirectToAction("Index");
+            }
+        }
+
+        //confirmar la eliminación 
+        public ActionResult Confirmar_Eliminar(int id)
+        {
+            SweetAlert_Eliminar(id);
+            return RedirectToAction("index");
+        }
+
         #region Auxiliares
         private class Opciones
         {
@@ -314,6 +354,51 @@ namespace Transportes_MVC.Controllers
             };
 
             ViewBag.ListarTipos = lista_opciones; 
+        }
+        #endregion
+
+        #region Sweet Alert 
+        private void SweetAlert(string title, string msg, NotificationType type)
+        {
+            var script = "<script languaje='javascript'> " +
+                         "Swal.fire({" +
+                         "title: '" + title + "'," +
+                         "text: '" + msg + "'," +
+                         "icon: '" + type + "'" +
+                         "});" +
+                     "</script>";
+            //TemData funciona como un ViewBag, pasando información 
+            TempData["sweetalert"] = script; 
+        }
+        private void SweetAlert_Eliminar(int id)
+        {
+            var script = "<script languaje='javascript'>" +
+                "Swal.fire({" +
+                "title: '¿Estás Seguro?'," +
+                "text: 'Estás apunto de Eliminar el Camión: " + id.ToString() + "'," +
+                "icon: 'info'," +
+                "showDenyButton: true," +
+                "showCancelButton: true," +
+                "confirmButtonText: 'Eliminar'," +
+                "denyButtonText: 'Cancelar'" +
+                "}).then((result) => {" +
+                "if (result.isConfirmed) {  " +
+                "window.location.href = '/Camiones/Eliminar_Camion/" + id + "';" +
+                "} else if (result.isDenied) {  " +
+                "Swal.fire('Se ha cancelado la operación','','info');" +
+                "}" +
+                "});" +
+                "</script>";
+
+            TempData["sweetalert"] = script;
+        }
+        public enum NotificationType
+        {
+            error,
+            success,
+            warning,
+            info, 
+            question
         }
         #endregion
     }

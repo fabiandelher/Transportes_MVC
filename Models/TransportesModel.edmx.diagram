@@ -4,8 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a099e379a614573a2e18ce2fbc08721" Name="Diagram1">
+      <Diagram DiagramId="7a099e379a614573a2e18ce2fbc08721" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="TransportesModel.Camiones" Width="1.5" PointX="1.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransportesModel.bitacora_camiones" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="TransportesModel.Cargamentos" Width="1.5" PointX="8.25" PointY="1.5" />
+        <EntityTypeShape EntityType="TransportesModel.Choferes" Width="1.5" PointX="3.75" PointY="6.125" />
+        <EntityTypeShape EntityType="TransportesModel.Direcciones" Width="1.5" PointX="3.75" PointY="1.75" />
+        <EntityTypeShape EntityType="TransportesModel.prueba" Width="1.5" PointX="5.75" PointY="6" />
+        <EntityTypeShape EntityType="TransportesModel.Rutas" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="TransportesModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="TransportesModel.Usuarios" Width="1.5" PointX="7.75" PointY="6" />
+        <EntityTypeShape EntityType="TransportesModel.View_Rutas" Width="1.5" PointX="10.375" PointY="3.875" />
+        <AssociationConnector Association="TransportesModel.FK__Rutas__Camion_ID__4E88ABD4" />
+        <AssociationConnector Association="TransportesModel.FK__Cargament__Ruta___5165187F" />
+        <AssociationConnector Association="TransportesModel.FK__Rutas__Chofer_ID__5441852A" />
+        <AssociationConnector Association="TransportesModel.FK__Rutas__Direccion__571DF1D5" />
+        <AssociationConnector Association="TransportesModel.FK__Rutas__Direccion__5812160E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
